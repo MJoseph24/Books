@@ -23,16 +23,16 @@ let BookController = class BookController {
         const books = await this.booksService.getAllBooks();
         return books;
     }
-    async addProduct(bookData) {
-        const generatedId = await this.booksService.insertBook(bookData.bookTitle, bookData.bookAuthor, bookData.authorlf, bookData.additionalAuthor, bookData.bookISBN, bookData.bookISBN13, bookData.rating, bookData.avgRating, bookData.publisher, bookData.binding, bookData.pages, bookData.pubYear, bookData.originalPubYear, bookData.dateRead, bookData.dateAdded, bookData.shelves, bookData.shelvesPos, bookData.exShelf, bookData.myReview, bookData.spoiler, bookData.privateNotes, bookData.count, bookData.copies);
+    async addProduct(bookTitle, bookAuthor, authorlf, additionalAuthor, bookISBN, bookISBN13, rating, avgRating, publisher, binding, pages, pubYear, originalPubYear, dateRead, dateAdded, shelves, shelvesPos, exShelf, myReview, spoiler, privateNotes, count, copies) {
+        const generatedId = await this.booksService.insertBook(bookTitle, bookAuthor, authorlf, additionalAuthor, bookISBN, bookISBN13, rating, avgRating, publisher, binding, pages, pubYear, originalPubYear, dateRead, dateAdded, shelves, shelvesPos, exShelf, myReview, spoiler, privateNotes, count, copies);
         return { id: generatedId };
     }
     async getBookById(bookId) {
         const book = await this.booksService.getBookById(bookId);
         return book;
     }
-    async updateBookById(bookId, bookData) {
-        await this.booksService.updateBookById(bookId, bookData.bookTitle, bookData.bookAuthor, bookData.authorlf, bookData.additionalAuthor, bookData.bookISBN, bookData.bookISBN13, bookData.rating, bookData.avgRating, bookData.publisher, bookData.binding, bookData.pages, bookData.pubYear, bookData.originalPubYear, bookData.dateRead, bookData.dateAdded, bookData.shelves, bookData.shelvesPos, bookData.exShelf, bookData.myReview, bookData.spoiler, bookData.privateNotes, bookData.count, bookData.copies);
+    async updateBookById(bookId, bookTitle, bookAuthor, authorlf, additionalAuthor, bookISBN, bookISBN13, rating, avgRating, publisher, binding, pages, pubYear, originalPubYear, dateRead, dateAdded, shelves, shelvesPos, exShelf, myReview, spoiler, privateNotes, count, copies) {
+        await this.booksService.updateBookById(bookId, bookTitle, bookAuthor, authorlf, additionalAuthor, bookISBN, bookISBN13, rating, avgRating, publisher, binding, pages, pubYear, originalPubYear, dateRead, dateAdded, shelves, shelvesPos, exShelf, myReview, spoiler, privateNotes, count, copies);
         return null;
     }
     async deleteBookById(bookId) {
@@ -48,9 +48,31 @@ __decorate([
 ], BookController.prototype, "getAllBooks", null);
 __decorate([
     (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)()),
+    __param(0, (0, common_1.Body)('bookTitle')),
+    __param(1, (0, common_1.Body)('bookAuthor')),
+    __param(2, (0, common_1.Body)('authorlf')),
+    __param(3, (0, common_1.Body)('additionalAuthor')),
+    __param(4, (0, common_1.Body)('bookISBN')),
+    __param(5, (0, common_1.Body)('bookISBN13')),
+    __param(6, (0, common_1.Body)('rating')),
+    __param(7, (0, common_1.Body)('avgRating')),
+    __param(8, (0, common_1.Body)('publisher')),
+    __param(9, (0, common_1.Body)('binding')),
+    __param(10, (0, common_1.Body)('pages')),
+    __param(11, (0, common_1.Body)('pubYear')),
+    __param(12, (0, common_1.Body)('originalPubYear')),
+    __param(13, (0, common_1.Body)('dateRead')),
+    __param(14, (0, common_1.Body)('dateAdded')),
+    __param(15, (0, common_1.Body)('shelves')),
+    __param(16, (0, common_1.Body)('shelvesPos')),
+    __param(17, (0, common_1.Body)('exShelf')),
+    __param(18, (0, common_1.Body)('myReview')),
+    __param(19, (0, common_1.Body)('spoiler')),
+    __param(20, (0, common_1.Body)('privateNotes')),
+    __param(21, (0, common_1.Body)('count')),
+    __param(22, (0, common_1.Body)('copies')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [String, String, String, String, String, Number, Number, Number, String, String, Number, Number, Number, String, String, String, String, String, String, String, String, Number, Number]),
     __metadata("design:returntype", Promise)
 ], BookController.prototype, "addProduct", null);
 __decorate([
@@ -63,9 +85,31 @@ __decorate([
 __decorate([
     (0, common_1.Patch)(":id"),
     __param(0, (0, common_1.Param)("id")),
-    __param(1, (0, common_1.Body)()),
+    __param(1, (0, common_1.Body)('bookTitle')),
+    __param(2, (0, common_1.Body)('bookAuthor')),
+    __param(3, (0, common_1.Body)('authorlf')),
+    __param(4, (0, common_1.Body)('additionalAuthor')),
+    __param(5, (0, common_1.Body)('bookISBN')),
+    __param(6, (0, common_1.Body)('bookISBN13')),
+    __param(7, (0, common_1.Body)('rating')),
+    __param(8, (0, common_1.Body)('avgRating')),
+    __param(9, (0, common_1.Body)('publisher')),
+    __param(10, (0, common_1.Body)('binding')),
+    __param(11, (0, common_1.Body)('pages')),
+    __param(12, (0, common_1.Body)('pubYear')),
+    __param(13, (0, common_1.Body)('originalPubYear')),
+    __param(14, (0, common_1.Body)('dateRead')),
+    __param(15, (0, common_1.Body)('dateAdded')),
+    __param(16, (0, common_1.Body)('shelves')),
+    __param(17, (0, common_1.Body)('shelvesPos')),
+    __param(18, (0, common_1.Body)('exShelf')),
+    __param(19, (0, common_1.Body)('myReview')),
+    __param(20, (0, common_1.Body)('spoiler')),
+    __param(21, (0, common_1.Body)('privateNotes')),
+    __param(22, (0, common_1.Body)('count')),
+    __param(23, (0, common_1.Body)('copies')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [String, String, String, String, String, String, Number, Number, Number, String, String, Number, Number, Number, String, String, String, String, String, String, String, String, Number, Number]),
     __metadata("design:returntype", Promise)
 ], BookController.prototype, "updateBookById", null);
 __decorate([

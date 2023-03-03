@@ -8,6 +8,16 @@ import { title } from "process";
 export class BookService {
   constructor(@InjectModel("Book") private readonly bookModel: Model<Book>) {}
 
+  // async getAllGusu() {
+  //   const chars = await this.charModel.find().exec();
+  //   chars.filter((e) => e.sect === "Gusu Lan");
+  // }
+
+  // async getAllGusu() {
+  //   const chars = await this.charModel.find().exec();
+  //   chars.filter((e) => e.sect === "Gusu Lan");
+  // }
+
   async getAllBooks() {
     const books = await this.bookModel.find().exec();
     return books.map((book) => ({
@@ -89,7 +99,7 @@ export class BookService {
       copies: copies,
     });
     const result = await newBook.save();
-    return result.id as string;
+    return result;
   }
 
   async getBookById(bookId: string) {

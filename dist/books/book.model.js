@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookSchema = void 0;
 const mongoose = require("mongoose");
 exports.BookSchema = new mongoose.Schema({
-    bookTitle: { type: String, required: true },
+    bookTitle: { type: String, required: false },
     bookAuthor: { type: String, required: false },
     authorlf: { type: String, required: false },
     additionalAuthor: { type: String, required: false },

@@ -1,7 +1,7 @@
 import * as mongoose from "mongoose";
 
 export const BookSchema = new mongoose.Schema({
-  bookTitle: { type: String, required: true },
+  bookTitle: { type: String, required: false },
   bookAuthor: { type: String, required: false },
   authorlf: { type: String, required: false },
   additionalAuthor: { type: String, required: false },
@@ -27,28 +27,28 @@ export const BookSchema = new mongoose.Schema({
 });
 
 export interface Book extends mongoose.Document {
-  bookId: string,
-  bookTitle: string,
-  bookAuthor: string,
-  authorlf: string,
-  additionalAuthor: string,
-  bookISBN: string,
-  bookISBN13: number,
-  rating: number,
-  avgRating: number,
-  publisher: string,
-  binding: string,
-  pages: number,
-  pubYear: number,
-  originalPubYear: number,
-  dateRead: string,
-  dateAdded: string,
-  shelves: string,
-  shelvesPos: string,
-  exShelf: string,
-  myReview: string,
-  spoiler: string,
-  privateNotes: string,
-  count: number,
-  copies: number,
+  bookId: string;
+  bookTitle: string;
+  bookAuthor: string;
+  authorlf: string;
+  additionalAuthor: string;
+  bookISBN: string;
+  bookISBN13: number;
+  rating: number;
+  avgRating: number;
+  publisher: string;
+  binding: string;
+  pages: number;
+  pubYear: number;
+  originalPubYear: number;
+  dateRead: string;
+  dateAdded: string;
+  shelves: string;
+  shelvesPos: string;
+  exShelf: string;
+  myReview: string;
+  spoiler: string;
+  privateNotes: string;
+  count: number;
+  copies: number;
 }

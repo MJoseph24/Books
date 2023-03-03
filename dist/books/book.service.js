@@ -76,7 +76,7 @@ let BookService = class BookService {
             copies: copies,
         });
         const result = await newBook.save();
-        return result.id;
+        return result;
     }
     async getBookById(bookId) {
         const book = await await this.findBook(bookId);

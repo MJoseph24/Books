@@ -13,6 +13,7 @@ import { BookService } from "./book.service";
 export class BookController {
   constructor(private readonly booksService: BookService) {}
 
+
   @Get()
   async getAllBooks() {
     const books = await this.booksService.getAllBooks();
@@ -20,62 +21,58 @@ export class BookController {
   }
 
   @Post()
-  async addProduct(
-    @Body()
-    bookData: {
-      bookId: number,
-      bookTitle: string,
-      bookAuthor: string,
-      authorlf: string,
-      additionalAuthor: string,
-      bookISBN: string,
-      bookISBN13: number,
-      rating: number,
-      avgRating: number,
-      publisher: string,
-      binding: string,
-      pages: number,
-      pubYear: number,
-      originalPubYear: number,
-      dateRead: string,
-      dateAdded: string,
-      shelves: string,
-      shelvesPos: string,
-      exShelf: string,
-      myReview: string,
-      spoiler: string,
-      privateNotes: string,
-      count: number,
-      copies: number,
-    }
-  ) {
-    const generatedId = await this.booksService.insertBook(
-      bookData.bookTitle,
-      bookData.bookAuthor,
-      bookData.authorlf,
-      bookData.additionalAuthor,
-      bookData.bookISBN,
-      bookData.bookISBN13,
-      bookData.rating,
-      bookData.avgRating,
-      bookData.publisher,
-      bookData.binding,
-      bookData.pages,
-      bookData.pubYear,
-      bookData.originalPubYear,
-      bookData.dateRead,
-      bookData.dateAdded,
-      bookData.shelves,
-      bookData.shelvesPos,
-      bookData.exShelf,
-      bookData.myReview,
-      bookData.spoiler,
-      bookData.privateNotes,
-      bookData.count,
-      bookData.copies
-    );
-    return { id: generatedId };
-  }
+async addProduct(
+  @Body('bookTitle') bookTitle: string,
+  @Body('bookAuthor') bookAuthor: string,
+  @Body('authorlf') authorlf: string,
+  @Body('additionalAuthor') additionalAuthor: string,
+  @Body('bookISBN') bookISBN: string,
+  @Body('bookISBN13') bookISBN13: number,
+  @Body('rating') rating: number,
+  @Body('avgRating') avgRating: number,
+  @Body('publisher') publisher: string,
+  @Body('binding') binding: string,
+  @Body('pages') pages: number,
+  @Body('pubYear') pubYear: number,
+  @Body('originalPubYear') originalPubYear: number,
+  @Body('dateRead') dateRead: string,
+  @Body('dateAdded') dateAdded: string,
+  @Body('shelves') shelves: string,
+  @Body('shelvesPos') shelvesPos: string,
+  @Body('exShelf') exShelf: string,
+  @Body('myReview') myReview: string,
+  @Body('spoiler') spoiler: string,
+  @Body('privateNotes') privateNotes: string,
+  @Body('count') count: number,
+  @Body('copies') copies: number,
+) {
+  const generatedId = await this.booksService.insertBook(
+    bookTitle,
+    bookAuthor,
+    authorlf,
+    additionalAuthor,
+    bookISBN,
+    bookISBN13,
+    rating,
+    avgRating,
+    publisher,
+    binding,
+    pages,
+    pubYear,
+    originalPubYear,
+    dateRead,
+    dateAdded,
+    shelves,
+    shelvesPos,
+    exShelf,
+    myReview,
+    spoiler,
+    privateNotes,
+    count,
+    copies
+  );
+  return { id: generatedId };
+}
 
   @Get(":id")
   async getBookById(@Param("id") bookId: string) {
@@ -85,63 +82,60 @@ export class BookController {
   }
 
   @Patch(":id")
-  async updateBookById(
-    @Param("id") bookId: string,
-    @Body()
-    bookData: {
-      bookTitle: string,
-      bookAuthor: string,
-      authorlf: string,
-      additionalAuthor: string,
-      bookISBN: string,
-      bookISBN13: number,
-      rating: number,
-      avgRating: number,
-      publisher: string,
-      binding: string,
-      pages: number,
-      pubYear: number,
-      originalPubYear: number,
-      dateRead: string,
-      dateAdded: string,
-      shelves: string,
-      shelvesPos: string,
-      exShelf: string,
-      myReview: string,
-      spoiler: string,
-      privateNotes: string,
-      count: number,
-      copies: number,
-    }
-  ) {
-    await this.booksService.updateBookById(
-      bookId,
-      bookData.bookTitle,
-      bookData.bookAuthor,
-      bookData.authorlf,
-      bookData.additionalAuthor,
-      bookData.bookISBN,
-      bookData.bookISBN13,
-      bookData.rating,
-      bookData.avgRating,
-      bookData.publisher,
-      bookData.binding,
-      bookData.pages,
-      bookData.pubYear,
-      bookData.originalPubYear,
-      bookData.dateRead,
-      bookData.dateAdded,
-      bookData.shelves,
-      bookData.shelvesPos,
-      bookData.exShelf,
-      bookData.myReview,
-      bookData.spoiler,
-      bookData.privateNotes,
-      bookData.count,
-      bookData.copies,
-    );
-    return null;
-  }
+async updateBookById(
+@Param("id") bookId: string,
+@Body('bookTitle') bookTitle: string,
+@Body('bookAuthor') bookAuthor: string,
+@Body('authorlf') authorlf: string,
+@Body('additionalAuthor') additionalAuthor: string,
+@Body('bookISBN') bookISBN: string,
+@Body('bookISBN13') bookISBN13: number,
+@Body('rating') rating: number,
+@Body('avgRating') avgRating: number,
+@Body('publisher') publisher: string,
+@Body('binding') binding: string,
+@Body('pages') pages: number,
+@Body('pubYear') pubYear: number,
+@Body('originalPubYear') originalPubYear: number,
+@Body('dateRead') dateRead: string,
+@Body('dateAdded') dateAdded: string,
+@Body('shelves') shelves: string,
+@Body('shelvesPos') shelvesPos: string,
+@Body('exShelf') exShelf: string,
+@Body('myReview') myReview: string,
+@Body('spoiler') spoiler: string,
+@Body('privateNotes') privateNotes: string,
+@Body('count') count: number,
+@Body('copies') copies: number,
+) {
+await this.booksService.updateBookById(
+bookId,
+bookTitle,
+bookAuthor,
+authorlf,
+additionalAuthor,
+bookISBN,
+bookISBN13,
+rating,
+avgRating,
+publisher,
+binding,
+pages,
+pubYear,
+originalPubYear,
+dateRead,
+dateAdded,
+shelves,
+shelvesPos,
+exShelf,
+myReview,
+spoiler,
+privateNotes,
+count,
+copies,
+);
+return null;
+}
 
   @Delete(":id")
   async deleteBookById(@Param("id") bookId: string) {
