@@ -20,6 +20,11 @@ let BookService = class BookService {
     constructor(bookModel) {
         this.bookModel = bookModel;
     }
+    async getAllAuthors() {
+        const books = await this.bookModel.find({ sect: 'bookAuthor' }).exec();
+        const authors = books.map((book) => book.bookAuthor);
+        return authors;
+    }
     async getAllBooks() {
         const books = await this.bookModel.find().exec();
         return books.map((book) => ({
@@ -50,6 +55,7 @@ let BookService = class BookService {
         }));
     }
     async insertBook(bookTitle, bookAuthor, authorlf, additionalAuthor, bookISBN, bookISBN13, rating, avgRating, publisher, binding, pages, pubYear, originalPubYear, dateRead, dateAdded, shelves, shelvesPos, exShelf, myReview, spoiler, privateNotes, count, copies) {
+        console.log(copies);
         const newBook = new this.bookModel({
             bookTitle: bookTitle,
             bookAuthor: bookAuthor,
@@ -75,11 +81,13 @@ let BookService = class BookService {
             count: count,
             copies: copies,
         });
+        console.log(newBook);
         const result = await newBook.save();
-        return result;
+        return result.id;
     }
     async getBookById(bookId) {
-        const book = await await this.findBook(bookId);
+        const book = await this.findBook(bookId);
+        console.log(bookId);
         return {
             bookTitle: book.bookTitle,
             bookAuthor: book.bookAuthor,
@@ -187,6 +195,7 @@ let BookService = class BookService {
     }
     async findBook(bookId) {
         let book;
+        console.log(bookId);
         try {
             book = await this.bookModel.findById(bookId);
         }
@@ -194,8 +203,9 @@ let BookService = class BookService {
             throw new common_1.NotFoundException("book does not exist");
         }
         if (!book) {
-            throw new common_1.NotFoundException("book does not exist");
+            throw new common_1.NotFoundException("book does not exist!!!!!");
         }
+        console.log(book);
         return book;
     }
 };

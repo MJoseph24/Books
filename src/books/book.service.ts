@@ -3,23 +3,21 @@ import { Book } from "./book.model";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { title } from "process";
+import { CONFIGURABLE_MODULE_ID } from "@nestjs/common/module-utils/constants";
 
 @Injectable()
 export class BookService {
   constructor(@InjectModel("Book") private readonly bookModel: Model<Book>) {}
 
-  // async getAllGusu() {
-  //   const chars = await this.charModel.find().exec();
-  //   chars.filter((e) => e.sect === "Gusu Lan");
-  // }
-
-  // async getAllGusu() {
-  //   const chars = await this.charModel.find().exec();
-  //   chars.filter((e) => e.sect === "Gusu Lan");
-  // }
+  async getAllAuthors() {
+    const books = await this.bookModel.find({ sect: 'bookAuthor' }).exec();
+    const authors = books.map((book) => book.bookAuthor);
+    return authors;
+  }
 
   async getAllBooks() {
     const books = await this.bookModel.find().exec();
+
     return books.map((book) => ({
       bookId: book.bookId,
       bookTitle: book.bookTitle,
@@ -73,6 +71,7 @@ export class BookService {
     count: number,
     copies: number
   ) {
+    console.log(copies);
     const newBook = new this.bookModel({
       bookTitle: bookTitle,
       bookAuthor: bookAuthor,
@@ -98,12 +97,15 @@ export class BookService {
       count: count,
       copies: copies,
     });
+    console.log(newBook);
     const result = await newBook.save();
-    return result;
+    return result.id as string;
   }
 
   async getBookById(bookId: string) {
-    const book = await await this.findBook(bookId);
+    const book =  await this.findBook(bookId);
+    console.log(bookId);
+
     return {
       bookTitle: book.bookTitle,
       bookAuthor: book.bookAuthor,
@@ -240,14 +242,16 @@ export class BookService {
 
   private async findBook(bookId: string): Promise<Book> {
     let book;
+    console.log(bookId);
     try {
       book = await this.bookModel.findById(bookId);
     } catch (error) {
       throw new NotFoundException("book does not exist");
     }
     if (!book) {
-      throw new NotFoundException("book does not exist");
+      throw new NotFoundException("book does not exist!!!!!");
     }
+    console.log(book);
     return book;
   }
 }
